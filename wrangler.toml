@@ -1,0 +1,64 @@
+# Wrangler configuration for cf_ai_chatbot
+# This defines the Worker, Durable Object bindings, and configuration
+
+name = "cf-ai-yashmyeole-chatbot"
+main = "src/index.js"
+compatibility_date = "2024-10-01"
+
+[assets]
+directory = "./pages"
+binding = "ASSETS"
+
+# Worker configuration
+[build]
+command = ""
+cwd = "./"
+
+# Durable Object binding for conversation history
+[[durable_objects.bindings]]
+name = "CHAT_MEMORY"
+class_name = "ChatMemory"
+
+# Durable Object migrations - required for DO evolution
+[[migrations]]
+tag = "v1"
+new_classes = [ "ChatMemory" ]
+
+# Top-level environment variables (available in all environments)
+[vars]
+# Enable/disable Workers AI (false for local dev so it uses OpenAI instead)
+WORKERS_AI_ENABLED = "false"
+# Model ID for Workers AI (e.g., "llama-3.3") - used in production
+WORKERS_AI_MODEL = "llama-3.3"
+# Model for OpenAI fallback (requires OPENAI_API_KEY secret)
+OPENAI_MODEL = "gpt-4o-mini"
+# Max conversation history length per user (for cost optimization)
+CONVERSATION_HISTORY_LIMIT = "6"
+# Timeout for LLM API calls (milliseconds)
+LLM_TIMEOUT_MS = "30000"
+
+# Production environment
+[env.production]
+name = "cf-ai-yashmyeole-chatbot"
+# Routes can be configured here if deploying to a specific domain
+# routes = [{ pattern = "example.com/api/*", zone_name = "example.com" }]
+vars = { WORKERS_AI_ENABLED = "true", WORKERS_AI_MODEL = "llama-3.3", OPENAI_MODEL = "gpt-4o-mini", CONVERSATION_HISTORY_LIMIT = "6", LLM_TIMEOUT_MS = "30000" }
+
+# Development environment (local testing)
+[env.development]
+vars = { WORKERS_AI_ENABLED = "false", WORKERS_AI_MODEL = "llama-3.3", OPENAI_MODEL = "gpt-4o-mini", CONVERSATION_HISTORY_LIMIT = "6", LLM_TIMEOUT_MS = "30000" }
+
+# Static site configuration (for Cloudflare Pages production deployment)
+# For local development, use: npx wrangler dev
+# Static files will be served when deployed to Cloudflare Pages with [site] enabled
+# [site]
+# bucket = "pages"
+
+# Note: Secrets are set via `wrangler secret put` and are NOT stored in this file
+# Required secrets:
+#   - OPENAI_API_KEY (for fallback LLM when Workers AI unavailable)
+#
+# To set secrets safely:
+#   npx wrangler secret put OPENAI_API_KEY
+#
+# Secrets are scoped to the environment in which they're set.

@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "include": ["/api/*"],
+  "exclude": [],
+  "routes": [
+    {
+      "pattern": "^/api/.*$",
+      "methods": ["POST", "GET", "PUT", "DELETE", "PATCH"],
+      "script": "cf-ai-yashmyeole-chatbot"
+    },
+    {
+      "pattern": "^/.*$",
+      "methods": ["GET", "HEAD"],
+      "script": "cf-ai-yashmyeole-chatbot"
+    }
+  ]
+}

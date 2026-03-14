@@ -1,0 +1,27 @@
+{
+  "name": "cf_ai_chatbot",
+  "version": "1.0.0",
+  "description": "A minimal AI chat web app using Cloudflare developer stack",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler publish",
+    "pages:deploy": "wrangler pages deploy pages/",
+    "test": "bash scripts/dev_commands.sh"
+  },
+  "keywords": [
+    "cloudflare",
+    "workers",
+    "durable-objects",
+    "ai",
+    "chat",
+    "llama",
+    "openai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^4.73.0"
+  }
+}

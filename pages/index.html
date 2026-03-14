@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloudflare AI Chatbot</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>💬 Cloudflare AI Chat</h1>
+        <p class="subheader">
+          Powered by Workers AI & Cloudflare Durable Objects
+        </p>
+      </div>
+
+      <div class="setup-section">
+        <div class="input-group">
+          <label for="userId">Your Username:</label>
+          <input
+            type="text"
+            id="userId"
+            placeholder="Enter your username"
+            value="user_"
+          />
+        </div>
+      </div>
+
+      <div class="chat-container">
+        <div id="chatHistory" class="chat-history">
+          <div class="system-message">
+            👋 Welcome! Enter your username and start chatting with the AI.
+          </div>
+        </div>
+
+        <div class="input-section">
+          <textarea
+            id="messageInput"
+            class="message-input"
+            placeholder="Type your message... (Shift+Enter to send)"
+          ></textarea>
+          <button id="sendBtn" class="send-button">Send</button>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="clearBtn" class="btn-secondary">Clear History</button>
+        <button id="loadHistoryBtn" class="btn-secondary">Load History</button>
+        <div id="status" class="status-indicator">Ready</div>
+      </div>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

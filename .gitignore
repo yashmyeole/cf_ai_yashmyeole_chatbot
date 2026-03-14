@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Environment & Secrets
+.env
+.env.local
+.env.*.local
+.dev.vars
+.wrangler/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+*.log
+
+# Build & Dist
+dist/
+build/
+
+# Wrangler local development
+.wrangler
+wrangler.local.toml
+
+# OS
+Thumbs.db
